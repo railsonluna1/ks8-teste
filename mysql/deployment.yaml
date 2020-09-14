@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maria-db-server
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: maria-db-server
+      tier: db
+
+  template:
+    metadata:
+      labels:
+        app: maria-db-server
+        tier: db
+
+    spec:
+      containers:
+      - image: mariadb
+        name: mariadb
+        args:
+          - "--ignore-db-dir=lost+found"
+
+        resources:
+          requests:
+            cpu: "20m"
+            memory: "55M"
+          limits:
+              cpu: "21m"
+              memory: "55M"
+
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-pass
+              key: password
+
+        ports:
+        - containerPort: 3606
+      
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: mysql-persistent-volume
+      
+      
+      volumes:
+      - name: mysql-persistent-volume
+        persistentVolumeClaim:
+          claimName: maria-db-volume
