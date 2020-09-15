@@ -1,7 +1,8 @@
 steps:
   # see https://www.npmjs.com/package/editorconfig-checker
   - id: "Rodando docker-compose"
-    name: 'gcr.io/$PROJECT_ID/docker-compose'
+    name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
     args: [ '-f', 'docker-compose.yml', 'up', '-d' ]
 
   - id: go_version
