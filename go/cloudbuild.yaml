@@ -9,10 +9,10 @@ steps:
     args: ["version"]
     env: ["GOPATH=."]
 
-  - id: go_test
-    name: "gcr.io/cloud-builders/go"
-    args: ["test", "main"]
-    env: ["GOPATH=."]
+#   - id: go_test
+#     name: "gcr.io/cloud-builders/go"
+#     args: ["test", "main"]
+#     env: ["GOPATH=."]
 
   - id: your_step_here
     name: "gcr.io/cloud-builders/go"
