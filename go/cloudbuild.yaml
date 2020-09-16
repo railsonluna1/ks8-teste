@@ -1,7 +1,8 @@
 steps:
   # see https://www.npmjs.com/package/editorconfig-checker
-  - id: eclint
-    name: "e53e225/editorconfig-checker"
+  - id: "Rodando docker-compose"
+    name: 'gcr.io/$PROJECT_ID/docker-compose'
+    args: [ '-f', 'go/docker-compose.yml', 'up', '-d' ]
 
   - id: go_version
     name: "gcr.io/cloud-builders/go"
@@ -10,7 +11,7 @@ steps:
 
   - id: go_test
     name: "gcr.io/cloud-builders/go"
-    args: ["test","greeting"]
+    args: ["test"]
     env: ["GOPATH=."]
 
   - id: your_step_here
